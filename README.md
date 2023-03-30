@@ -1,2 +1,2 @@
 # attendance.py
- Does google form for me
+ Uses selenium to do google form for me
