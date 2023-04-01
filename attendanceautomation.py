@@ -44,32 +44,49 @@ with open('data.csv', 'r') as file:
         element = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div/span/div/div[21]/label/div/div[2]/div/span')
         element.click()
         month, day = date.split("/") #there is no input for year
+        month = month.zfill(2)
+        day = day.zfill(2)
+        total_date = month+'/'+day+'/'+'2023'
+
         
         #inputs the month and the day and the year
-        month_input = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/div[1]/div/div[2]/div[1]/div/div[1]/input')
-        month_input.send_keys(month)
-        day_input = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/div[1]/div/div[2]/div[1]/div/div[1]/input')
-        day_input.send_keys(day)
-        year_input = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/div[5]/div/div[2]/div[1]/div/div[1]/input')
-        year_input.send_keys('2023') #assumining it is all from 2023
+        date_input = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/div[2]/div[1]/div/div[1]/input')
+        date_input.send_keys(total_date)
 
-
+        #input school name
         school_name_input = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div[1]/div/div[1]/input')
         school_name_input.send_keys(school_name)
 
 
         select_grade = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div')
-        grade_options = select_grade.find_elements(By.TAG_NAME, f'.//div[@data-value="{grade}"]')
+        grade_options = select_grade.find_element(By.TAG_NAME, f'.//div[@data-value="{grade}"]')
         if grade_options:          #click the grade that matches what is given
             grade_options[0].click()
 
-        unique_ = driver.find_element(By.XPATH, '//*[@id="i152"]/div[3]/div') #done
-   
-        math_choice = driver.find_element(By.XPATH, '//*[@id="i159"]/div[3]/div') #done
-        ela_choice = driver.find_element(By.XPATH, '//*[@id="i166"]/div[3]/div/div')  #done
-        science_choice = driver.find_element(By.XPATH, '//*[@id="i173"]/div[3]/div')
-        social_studies = driver.find_element(By.XPATH, '//*[@id="i180"]/div[3]/div')
-        other_ = driver.find_element(By.XPATH, '//*[@id="i187"]/div[3]/div')
+        unique_ = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div[1]/div/span/div/div/label/div/div[1]/div/div[3]/div') #done
+        if unique == 'Yes' or unique == 'yes':
+            unique_.click()
+
+        math_choice = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div[1]/div/span/div/div/label/div/div[1]/div/div[3]/div') #done
+        if math == 'Yes' or math == 'yes':
+            math_choice.click()
+
+        ela_choice = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[2]/div[8]/div/div/div[2]/div[1]/div/span/div/div/label/div/div[1]/div/div[3]/div')  #done
+        if ela == 'Yes' or ela == 'yes':
+            ela_choice.click()
+
+        science_choice = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[9]/div/div/div[2]/div[1]/div/span/div/div/label/div/div[1]/div/div[3]/div')
+        if science == 'Yes' or science == 'yes':
+            science_choice.click()
+
+        social_studies_choice = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[10]/div/div/div[2]/div[1]/div/span/div/div')
+        if social_studies == 'Yes' or social_studies == 'yes':
+            social_studies_choice.click()
+
+        other_ = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[11]/div/div/div[2]/div[1]/div/span/div/div')
+        if other != "" and other != "no" and other != "No":
+            other_.click()
+
 
         
 
