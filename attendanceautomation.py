@@ -17,7 +17,7 @@ driver = webdriver.Chrome('drivers/chromedriver.exe', chrome_options=chrome_opti
 # Navigate to the Google sign-in page
 url = 'https://docs.google.com/forms/d/e/1FAIpQLSdgh6hUBkUe99r3BoNEPnDDxo5kMUjl-PoRenbOz_Y-xAVOsA/viewform'
 email = "prasangatiwari@nypl.org"
-password = "Ibrabest10-"
+password = ""
 driver.get(url)
 driver.implicitly_wait(10)  #Wait until the program loads
 
@@ -31,6 +31,25 @@ password_input.send_keys(password)
 password_input.send_keys(Keys.RETURN)
 time.sleep(30)
 
+grade_id = {              # identifies the id based on the grade  
+  "Pre-K": "i116",
+  "Kindergarten": "i119",
+  "1": "i122",
+  "2": "i125",
+  "3": "i128",
+  "4": "i131",
+  "5": "i134",
+  "6": "i137",
+  "7": "i140",
+  "8": "i143"
+}
+
+clearform = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[2]/div/span/span')
+clearform.click()
+
+time.sleep(7)
+
+
 #A CSV file is open and it reads data from the file
 with open('data.csv', 'r') as file:
     attendance = csv.reader(file)
@@ -38,7 +57,7 @@ with open('data.csv', 'r') as file:
     next(attendance)
     for row in attendance:
         #ignores the name and the branch because that is unnecessary
-        date, school_name, grade, unique, math, ela, science, social_studies, other  = row[1:]
+        name,date, school_name, grade, unique, math, ela, science, social_studies, other  = row[0:]
 
         #branch is already chosen
         element = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div/span/div/div[21]/label/div/div[2]/div/span')
@@ -58,10 +77,8 @@ with open('data.csv', 'r') as file:
         school_name_input.send_keys(school_name)
 
 
-        select_grade = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div')
-        grade_options = select_grade.find_element(By.TAG_NAME, f'.//div[@data-value="{grade}"]')
-        if grade_options:          #click the grade that matches what is given
-            grade_options[0].click()
+        grade_options = driver.find_element(By.ID, grade_id[grade])
+        grade_options.click()
 
         unique_ = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[6]/div/div/div[2]/div[1]/div/span/div/div/label/div/div[1]/div/div[3]/div') #done
         if unique == 'Yes' or unique == 'yes':
@@ -71,7 +88,7 @@ with open('data.csv', 'r') as file:
         if math == 'Yes' or math == 'yes':
             math_choice.click()
 
-        ela_choice = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[2]/div[8]/div/div/div[2]/div[1]/div/span/div/div/label/div/div[1]/div/div[3]/div')  #done
+        ela_choice = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/form/div[2]/div/div[2]/div[8]/div/div/div[2]/div[1]/div/span/div/div/label')  #done
         if ela == 'Yes' or ela == 'yes':
             ela_choice.click()
 
@@ -87,6 +104,7 @@ with open('data.csv', 'r') as file:
         if other != "" and other != "no" and other != "No":
             other_.click()
 
-
+        other_for_name = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[2]/div[12]/div/div/div[2]/div/div[1]/div[2]/textarea')
+        other_for_name.send_keys(name)
         
 
