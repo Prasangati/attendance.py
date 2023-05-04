@@ -29,16 +29,16 @@ password_input.send_keys(Keys.RETURN)
 time.sleep(30)
 
 grade_id = {              # identifies the id based on the grade  
-  "Pre-K": "i116",
-  "Kindergarten": "i119",
-  "1": "i122",
-  "2": "i125",
-  "3": "i128",
-  "4": "i131",
-  "5": "i134",
-  "6": "i137",
-  "7": "i140",
-  "8": "i143"
+  "Pre-K": "i123",
+  "Kindergarten": "i126",
+  "1": "i129",
+  "2": "i132",
+  "3": "i135",
+  "4": "i138",
+  "5": "i141",
+  "6": "i144",
+  "7": "i147",
+  "8": "i150"
 }
 
 clearform = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[2]/div/span/span')
