@@ -107,6 +107,6 @@ with open('data.csv', 'r') as file:
         submit = driver.find_element(By.CLASS_NAME, 'NPEfkd RveJvd snByac')
         submit.click()
 
-        another_form = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[4]/a[2]')
-        another_form.click()
+        #another_form = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[4]/a[2]')
+        #another_form.click()
 
