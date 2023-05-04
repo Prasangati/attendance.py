@@ -41,12 +41,6 @@ grade_id = {              # identifies the id based on the grade
   "8": "i150"
 }
 
-clearform = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[2]/div/span/span')
-clearform.click()
-
-time.sleep(7)
-
-
 #A CSV file is open and it reads data from the file
 with open('data.csv', 'r') as file:
     attendance = csv.reader(file)
@@ -54,6 +48,7 @@ with open('data.csv', 'r') as file:
     next(attendance)
     for row in attendance:
         #ignores the name and the branch because that is unnecessary
+
         name,date, school_name, grade, unique, math, ela, science, social_studies, other  = row[0:]
         verify = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div[1]/label/div/div[1]/div[2]')
         verify.click()
@@ -77,6 +72,7 @@ with open('data.csv', 'r') as file:
 
         grade_options = driver.find_element(By.ID, grade_id[grade])
         grade_options.click()
+
 
         unique_ = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[2]/div[7]/div/div/div[2]/div[1]/div/span/div/div/label/div/div[1]/div/div[3]/div/div1') #done
         if unique == 'Yes' or unique == 'yes':
@@ -112,4 +108,5 @@ with open('data.csv', 'r') as file:
         another_link = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[4]/a[2]')
         another_link.click()
         
+
 
