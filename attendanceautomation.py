@@ -41,6 +41,8 @@ grade_id = {              # identifies the id based on the grade
   "8": "i150"
 }
 
+
+
 #A CSV file is open and it reads data from the file
 with open('data.csv', 'r') as file:
     attendance = csv.reader(file)
@@ -55,6 +57,7 @@ with open('data.csv', 'r') as file:
         #branch is already chosen
         element = driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div/span/div/div[6]/label/div/div[1]/div/div[3]/div')
         element.click()
+        date = "5/10"
         month, day = date.split("/") #there is no input for year
         month = month.zfill(2)
         day = day.zfill(2)
